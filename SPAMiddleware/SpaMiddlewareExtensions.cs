@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Common.AspCore.Spa
+namespace SPAMiddleware
 {
     public static class SpaMiddlewareExtensions
     {

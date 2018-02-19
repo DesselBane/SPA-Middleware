@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Common.AspCore.Spa
+namespace SPAMiddleware
 {
     public class SpaMiddleware
     {
@@ -27,8 +27,7 @@ namespace Common.AspCore.Spa
 
         public async Task Invoke(HttpContext context)
         {
-            if (!context.Request.Path.StartsWithSegments("/api") &&
-                !context.Request.Path.StartsWithSegments("/swagger") && !Path.HasExtension(context.Request.Path.Value))
+            if (!context.Request.Path.StartsWithSegments("/api") && !Path.HasExtension(context.Request.Path.Value))
             {
                 context.Response.StatusCode = (int) HttpStatusCode.OK;
                 await context.Response.WriteAsync(File.ReadAllText(_indexPath));

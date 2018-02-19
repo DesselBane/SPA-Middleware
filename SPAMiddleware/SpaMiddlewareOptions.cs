@@ -1,4 +1,4 @@
-﻿namespace Common.AspCore.Spa
+﻿namespace SPAMiddleware
 {
     public sealed class SpaMiddlewareOptions
     {
