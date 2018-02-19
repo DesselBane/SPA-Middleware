@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SPAMiddleware
 {
     public static class SpaMiddlewareExtensions
     {
-        public static IServiceCollection AddSpaMiddleware(this IServiceCollection services, string pathToIndex)
+        public static IServiceCollection AddSpaMiddleware(this IServiceCollection services, string pathToIndex, IEnumerable<string> specialRoutes = null)
         {
-            services.AddSingleton(new SpaMiddlewareOptions {PathToIndex = pathToIndex});
+            services.AddSingleton(new SpaMiddlewareOptions(pathToIndex, specialRoutes));
 
             return services;
         }

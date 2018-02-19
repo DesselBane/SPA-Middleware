@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -9,8 +10,8 @@ namespace SPAMiddleware
     {
         #region Vars
 
-        private readonly string _indexPath;
         private readonly RequestDelegate _next;
+        private readonly SpaMiddlewareOptions _options;
 
         #endregion
 
@@ -19,18 +20,17 @@ namespace SPAMiddleware
         public SpaMiddleware(RequestDelegate next, SpaMiddlewareOptions options)
         {
             _next = next;
-
-            _indexPath = options.PathToIndex;
+            _options = options;
         }
 
         #endregion
 
         public async Task Invoke(HttpContext context)
         {
-            if (!context.Request.Path.StartsWithSegments("/api") && !Path.HasExtension(context.Request.Path.Value))
+            if (!_options.SpecialRoutes.Any(x => context.Request.Path.StartsWithSegments(x)) && !Path.HasExtension(context.Request.Path.Value))
             {
                 context.Response.StatusCode = (int) HttpStatusCode.OK;
-                await context.Response.WriteAsync(File.ReadAllText(_indexPath));
+                await context.Response.WriteAsync(File.ReadAllText(_options.PathToIndex));
             }
             else
             {
