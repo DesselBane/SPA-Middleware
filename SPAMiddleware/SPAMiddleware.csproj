@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>SpaMiddleware</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Dark Phantom</Authors>
     <Company>DarkSolutions</Company>
     <Title>Single Page Application Middleware</Title>
